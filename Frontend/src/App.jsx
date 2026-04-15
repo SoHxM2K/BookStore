@@ -2,8 +2,12 @@
 
 
 import './App.css'
-import { BrowserRouter, Routes, Route } from "react-router";
+import { Routes, Route } from "react-router";
 import Home from './pages/Home';
+import CreateBook from './pages/CreateBook';
+import BookDetails from './pages/BookDetails';
+import EditBook from './pages/EditBook';
+import DeleteBook from './pages/DeleteBook';
 
 export default function App() {
   
