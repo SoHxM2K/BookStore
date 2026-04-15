@@ -4,6 +4,7 @@ import connectDB from "./config/db.js";
 import {Book} from "./models/bookModel.js";
 
 const app = express();
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -53,6 +54,28 @@ app.get("/books/:id", async (req, res) => {
         res.status(500).json({message: "Error fetching book!!"});
     }
 });
+
+app.put("/books/:id", async (req, res) => {
+
+    const {id} = req.params;
+    try {
+        const {title, author, PublishYear} = req.body;
+
+
+        const updatedBook = await Book.findByIdAndUpdate(id, {title, author, PublishYear});
+
+        res.status(200).json({message: "Book updated successfully!!", book: updatedBook});
+
+    } catch(error) {
+        res.status(500).json({message: "Error updating book!!"});
+    }
+});
+
+
+
+
+
+
 
 
 connectDB(app);
