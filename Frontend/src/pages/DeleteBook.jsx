@@ -21,12 +21,14 @@ export default function DeleteBook() {
 
       toast.success("Book deleted successfully");
 
+      setLoading(false);
+
       navigate("/");
     } catch (error) {
       toast.error("Error deleting book");
 
       console.log("Error deleting book:", error);
-    } finally {
+
       setLoading(false);
     }
   }

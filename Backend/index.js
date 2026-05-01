@@ -1,6 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import cors from "cors";
+import mongoose from "mongoose";
 
 import connectDB from "./config/db.js";
 import { Book } from "./models/bookModel.js";
@@ -45,6 +46,10 @@ app.get("/books", async (req, res) => {
 app.get("/books/:id", async (req, res) => {
   const { id } = req.params;
 
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid book ID" });
+  }
+
   try {
     const book = await Book.findById(id);
 
@@ -60,6 +65,10 @@ app.get("/books/:id", async (req, res) => {
 
 app.put("/books/:id", async (req, res) => {
   const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid book ID" });
+  }
 
   try {
     const { title, author, publishYear } = req.body;
@@ -82,6 +91,10 @@ app.put("/books/:id", async (req, res) => {
 
 app.delete("/books/:id", async (req, res) => {
   const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid book ID" });
+  }
 
   try {
     await Book.findByIdAndDelete(id);
