@@ -25,14 +25,14 @@ export default function EditBook() {
       await axios.put(`http://localhost:8000/books/${id}`, bookDetails);
 
       toast.success("Book updated successfully");
+
+      navigate("/");
     } catch (error) {
       toast.error("Error updating book");
 
       console.log("Error editing book:", error);
     } finally {
       setLoading(false);
-
-      navigate("/");
     }
   }
 

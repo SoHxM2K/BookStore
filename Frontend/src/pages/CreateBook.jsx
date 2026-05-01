@@ -23,14 +23,14 @@ export default function CreateBook() {
       await axios.post("http://localhost:8000/books", bookDetails);
 
       toast.success("Book added successfully");
+
+      navigate("/");
     } catch (error) {
       toast.error("Error adding book");
 
       console.log("Error adding book:", error);
     } finally {
       setLoading(false);
-
-      navigate("/");
     }
   }
 
